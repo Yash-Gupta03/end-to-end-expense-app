@@ -17,22 +17,10 @@
     <div class="wrapper bg-white">
       <div class="container w-50 mt-4 bg-white">
         <div class="form-details mt-5"></div>
-        <h2 id="form-heading" class="m-4 pt-3">Sign Up</h2>
+        <h2 id="form-heading" class="m-4 pt-3">Login</h2>
 
         <!-- Form  -->
-        <form onsubmit="signupdata(event)">
-          <div class="form-floating m-4">
-            <input
-              type="text"
-              name="name"
-              id="name"
-              placeholder="name"
-              class="form-control"
-              required
-            />
-            <label class="form-label" for="name">Name</label>
-          </div>
-
+        <form onsubmit="logindata(event)">
           <div class="form-floating m-4">
             <input
               type="email"
@@ -57,7 +45,7 @@
             <label class="form-label" for="password">Password</label>
           </div>
 
-          <button type="submit" class="btn btn-primary m-4">Sign Up</button>
+          <button type="submit" class="btn btn-primary m-4">SignIn</button>
         </form>
       </div>
       <ul id="list"></ul>
