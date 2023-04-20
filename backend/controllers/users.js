@@ -9,6 +9,7 @@ function isStringInvalid(string) {
   }
 }
 
+// Controller for Sign up
 exports.signUp = async (req, res, next) => {
   try {
     const name = req.body.name;
@@ -35,6 +36,7 @@ exports.signUp = async (req, res, next) => {
   }
 };
 
+// Controller for Login
 exports.login = async (req, res, next) => {
   try {
     const email = req.body.email;
@@ -66,3 +68,5 @@ exports.login = async (req, res, next) => {
     res.status(500).json({ err: err });
   }
 };
+
+// Controller for adding Expenses
