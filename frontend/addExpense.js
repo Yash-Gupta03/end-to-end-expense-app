@@ -16,8 +16,11 @@ function expensedata(e) {
     category: category,
   };
   // Post request to the server to store user details
+  const token = localStorage.getItem("id");
   axios
-    .post("http://localhost:3000/expense/add-expense", obj)
+    .post("http://localhost:3000/expense/add-expense", obj, {
+      headers: { Authorization: token },
+    })
     .then((response) => {
       if (response.status == 200) {
         const data = response.data.newExpenseDetail;
@@ -33,8 +36,12 @@ function expensedata(e) {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
+  const token = localStorage.getItem("id");
+  console.log(token);
   axios
-    .get("http://localhost:3000/expense/get-expense")
+    .get("http://localhost:3000/expense/get-expense", {
+      headers: { Authorization: token },
+    })
     .then((res) => {
       for (let i = 0; i < res.data.allExpenseDetails.length; i++) {
         showDataOnScreen(res.data.allExpenseDetails[i]);
@@ -51,8 +58,11 @@ function showDataOnScreen(data) {
 }
 
 function deleteExpense(id) {
+  const token = localStorage.getItem("id");
   axios
-    .delete(`http://localhost:3000/expense/delete-expense/${id}`)
+    .delete(`http://localhost:3000/expense/delete-expense/${id}`, {
+      headers: { Authorization: token },
+    })
     .then((res) => {
       removeFromScreen(id);
     })

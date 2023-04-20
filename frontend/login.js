@@ -18,6 +18,7 @@ function logindata(e) {
     .then((response) => {
       if (response.status == 200) {
         alert(response.data.message);
+        localStorage.setItem("id", response.data.token);
         window.location.href = "./addExpense.html";
       }
     })

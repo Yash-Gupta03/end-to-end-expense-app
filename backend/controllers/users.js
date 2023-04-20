@@ -1,5 +1,6 @@
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 function isStringInvalid(string) {
   if (string == undefined || string.length === 0) {
@@ -7,6 +8,10 @@ function isStringInvalid(string) {
   } else {
     return false;
   }
+}
+
+function generateToken(id) {
+  return jwt.sign({ userId: id }, "123456789");
 }
 
 // Controller for Sign up
@@ -49,14 +54,17 @@ exports.login = async (req, res, next) => {
     const data = await User.findAll({
       where: { email: email },
     });
+    // console.log(data[0]);
     if (data.length > 0) {
       bcrypt.compare(password, data[0].password, (error, result) => {
         if (error) {
           res.status(500).json({ message: "something wrong happened" });
         } else if (result == true) {
-          res
-            .status(200)
-            .json({ success: true, message: "logged in successfully" });
+          res.status(200).json({
+            success: true,
+            message: "logged in successfully",
+            token: generateToken(data[0].id),
+          });
         } else {
           res.status(400).json({ success: false, message: "Wrong Password" });
         }
@@ -68,5 +76,3 @@ exports.login = async (req, res, next) => {
     res.status(500).json({ err: err });
   }
 };
-
-// Controller for adding Expenses
