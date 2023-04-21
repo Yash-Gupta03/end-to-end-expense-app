@@ -6,6 +6,7 @@ const userRoutes = require("./routers/user");
 const cors = require("cors");
 const Expense = require("./models/expense");
 const User = require("./models/user");
+const Order = require("./models/order");
 
 app.use(cors());
 
@@ -15,6 +16,9 @@ app.use(userRoutes);
 
 User.hasMany(Expense);
 Expense.belongsTo(User);
+
+User.hasMany(Order);
+Order.belongsTo(User);
 
 sequelize
   .sync()

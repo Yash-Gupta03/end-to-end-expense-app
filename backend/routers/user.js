@@ -3,6 +3,7 @@ const express = require("express");
 const userController = require("../controllers/users");
 const expenseController = require("../controllers/expenses");
 const authController = require("../middlewares/authentic");
+const purchaseController = require("../controllers/purchase");
 
 const router = express.Router();
 
@@ -26,6 +27,18 @@ router.use(
   "/expense/delete-expense/:id",
   authController.authenticate,
   expenseController.deleteExpense
+);
+
+router.use(
+  "/purchase/premiummembership",
+  authController.authenticate,
+  purchaseController.purchasePremium
+);
+
+router.use(
+  "/purchase/updatetransactionstatus",
+  authController.authenticate,
+  purchaseController.updateTransaction
 );
 
 module.exports = router;
