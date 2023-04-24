@@ -1,5 +1,5 @@
 // Function invoked after the form is submittedform
-function signupdata(e) {
+async function signupdata(e) {
   e.preventDefault();
   let name = document.getElementById("name").value;
   let email = document.getElementById("email").value;
@@ -16,11 +16,20 @@ function signupdata(e) {
     email: email,
     password: password,
   };
+  // Alternate way
+  // const obj = {
+  //   name,
+  //   email,
+  //   password,
+  // };
+
   // Post request to the server to store user details
-  axios
-    .post("http://localhost:3000/user/sign-up", obj)
-    .then((response) => {
-      const newItem = response.data.newItemDetail;
-    })
-    .catch((err) => console.log(err));
+  try{
+    const response =  await axios.post("http://localhost:3000/user/sign-up", obj)
+    const newUser = response.data.newUserDetail;
+    window.location.href = "./login.html";
+  }catch(error){
+    console.log(error);
+  }
+  
 }

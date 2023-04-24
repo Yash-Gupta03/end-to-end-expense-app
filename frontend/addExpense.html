@@ -16,6 +16,7 @@
   <body>
     <nav class="d-flex flex-row-reverse bd-highlight m-4 p-4">
       <button id="rzp-btn" class="btn btn-primary">Buy Premium</button>
+      <button id="rzp-btn-premium" class="btn btn-primary" style="visibility: hidden;">Premium User</button>
     </nav>
     <div class="container w-50 mt-4 bg-light">
       <div class="form-details mt-5"></div>
@@ -58,8 +59,10 @@
         </select>
         <button type="submit" class="btn btn-primary m-4">Submit</button>
       </form>
+      <button id="leader-board" class="btn btn-primary m-4" style="visibility: hidden">LeaderBoard</button>
     </div>
-    <ul id="list"></ul>
+    <ul id="list">Expenses</ul>
+    <ul id="leaderboard-list">LeaderBoard</ul>
 
     <script src="addExpense.js"></script>
     <script

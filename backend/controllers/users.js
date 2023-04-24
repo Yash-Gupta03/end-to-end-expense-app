@@ -10,8 +10,8 @@ function isStringInvalid(string) {
   }
 }
 
-function generateToken(id) {
-  return jwt.sign({ userId: id }, "123456789");
+function generateToken(id, ispremiumuser) {
+  return jwt.sign({ userId: id, ispremiumuser }, "123456789");
 }
 
 // Controller for Sign up
@@ -33,8 +33,9 @@ exports.signUp = async (req, res, next) => {
         name: name,
         email: email,
         password: hash,
-      });
-      res.json({ newUserDetail: data });
+        ispremiumuser: false,
+      }).catch((err=>console.log(err)))
+      res.status(200).json({ newUserDetail: data });
     });
   } catch (err) {
     res.status(500).json({ err: err });
@@ -63,7 +64,7 @@ exports.login = async (req, res, next) => {
           res.status(200).json({
             success: true,
             message: "logged in successfully",
-            token: generateToken(data[0].id),
+            token: generateToken(data[0].id, data[0].ispremiumuser),
           });
         } else {
           res.status(400).json({ success: false, message: "Wrong Password" });
@@ -76,3 +77,4 @@ exports.login = async (req, res, next) => {
     res.status(500).json({ err: err });
   }
 };
+

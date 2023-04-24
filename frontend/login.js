@@ -1,4 +1,4 @@
-function logindata(e) {
+async function logindata(e) {
   e.preventDefault();
   let email = document.getElementById("email").value;
   let password = document.getElementById("password").value;
@@ -13,19 +13,17 @@ function logindata(e) {
     password: password,
   };
   // Post request to the server to store user details
-  axios
-    .post("http://localhost:3000/user/login", obj)
-    .then((response) => {
+  try{
+  const response = await axios.post("http://localhost:3000/user/login", obj)
       if (response.status == 200) {
         alert(response.data.message);
         localStorage.setItem("id", response.data.token);
         window.location.href = "./addExpense.html";
       }
-    })
-    .catch((err) => {
+    }catch(err){
       console.log(err);
       const parentNode = document.getElementById("list");
       const childNode = `<div style="color:red"><h5>${err.message}</h5></div>`;
       parentNode.innerHTML += childNode;
-    });
+    };
 }
