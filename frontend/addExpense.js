@@ -148,7 +148,6 @@ document.getElementById('leader-board').onclick = async function(){
 function showLeaderboardOnScreen(data) {
   const parentElement = document.getElementById("leaderboard-list");
   console.log("I am being called");
-  const childElement = `<li id=${data.id}>${data.price} --- ${data.description} --- ${data.category}
-                        </li>`;
+  const childElement = `<li id=${data.id}>${data.name} --- ${data.total_cost}                        </li>`;
   parentElement.innerHTML += childElement;
 }
