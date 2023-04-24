@@ -34,6 +34,7 @@ exports.signUp = async (req, res, next) => {
         email: email,
         password: hash,
         ispremiumuser: false,
+        totalExpense: 0
       }).catch((err=>console.log(err)))
       res.status(200).json({ newUserDetail: data });
     });

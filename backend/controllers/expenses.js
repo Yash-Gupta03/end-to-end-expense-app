@@ -1,4 +1,5 @@
 const Expense = require("../models/expense");
+const User = require('../models/user');
 
 function isStringInvalid(string) {
   if (string == undefined || string.length === 0) {
@@ -17,11 +18,16 @@ exports.addExpense = async (req, res, next) => {
   ) {
     res.status(400).json({ message: "bad parameters" });
   }
+  const total = Number(req.user.totalExpense) + Number(price);
+  User.update({totalExpense:total}, {where:{id:req.user.id}})
+
   const data = await Expense.create({
     price: price,
     description: description,
     category: category,
     userId: req.user.id,
+    
+
   });
   res.json({ newExpenseDetail: data });
 };

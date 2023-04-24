@@ -4,15 +4,16 @@ const sequelize = require("../utils/database");
 
 
 exports.getAllExpenses = async (req, res, next) => {
-    const leaderboardDetails = await User.findAll({attributes:['id', 'name',  [sequelize.fn('sum', sequelize.col('expenses.price')), 'total_cost'], ], 
-include:[
-    {
-        model:Expense,
-        attribute:[]
-    }
-], 
-group:['user.id'],
-order:[[sequelize.col('total_cost'), 'DESC']]
+    const leaderboardDetails = await User.findAll({attributes:['id', 'name', 'totalExpense'],
+//     [sequelize.fn('sum', sequelize.col('expenses.price')), 'total_cost'], ], 
+// include:[
+//     {
+//         model:Expense,
+//         attribute:[]
+//     }
+// ], 
+// group:['user.id'],
+order:[[sequelize.col('totalExpense'), 'DESC']]
 })
 
     
