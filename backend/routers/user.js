@@ -12,6 +12,7 @@ router.use("/sign-up", userController.signUp);
 router.use("/login", userController.login);
 
 
+
 router.use(
   "/purchase/premiummembership",
   authController.authenticate,

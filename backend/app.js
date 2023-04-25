@@ -8,10 +8,12 @@ const purchaseRoutes = require('./routers/purchase');
 const premiumRoutes = require('./routers/premium');
 const passwordRoutes = require('./routers/password');
 
+
 const cors = require("cors");
 const Expense = require("./models/expense");
 const User = require("./models/user");
 const Order = require("./models/order");
+const ForgotPasswordRequests = require('./models/forgotpasswordrequests');
 
 app.use(cors());
 
@@ -28,6 +30,9 @@ Expense.belongsTo(User);
 
 User.hasMany(Order);
 Order.belongsTo(User);
+
+User.hasMany(ForgotPasswordRequests);
+ForgotPasswordRequests.belongsTo(User);
 
 sequelize
   .sync()
