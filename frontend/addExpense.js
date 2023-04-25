@@ -53,6 +53,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("rzp-btn").style.visibility = 'hidden';
     document.getElementById("rzp-btn-premium").style.visibility = 'visible';
     document.getElementById("leader-board").style.visibility = 'visible'; 
+    document.getElementById("downloadexpense").style.visibility = 'visible';
   }
   try{
   const res = await axios.get("http://localhost:3000/expense/get-expense", {
