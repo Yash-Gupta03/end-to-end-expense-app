@@ -118,6 +118,7 @@ document.getElementById("rzp-btn").onclick = async function (e) {
       document.getElementById("rzp-btn-premium").style.visibility = 'visible';
       document.getElementById("rzp-btn").style.visibility = 'hidden';
       document.getElementById("leader-board").style.visibility = 'visible';
+      document.getElementById("downloadexpense").style.visibility = 'visible';
 
       alert("You are premium user");
 
@@ -152,3 +153,17 @@ function showLeaderboardOnScreen(data) {
   const childElement = `<li id=${data.id}>${data.name} --- ${data.totalExpense}                        </li>`;
   parentElement.innerHTML += childElement;
 }
+
+async function download(){
+  const token = localStorage.getItem("id");
+  const response = await axios.get('http://localhost:3000/expense/download', { headers: {"Authorization" : token} });
+      if(response.status === 200){
+          var a = document.createElement("a");
+          a.href = response.data.fileUrl;
+          console.log(response.data.fileUrl);
+          a.download = 'myexpense.csv';
+          a.click();
+      } else {
+          throw new Error(response.data.message)
+      }
+  }
