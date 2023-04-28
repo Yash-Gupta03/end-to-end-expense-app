@@ -53,7 +53,10 @@ function clearList(){
 
 async function getExpense(page){
   const token = localStorage.getItem("id");
-  const res = await axios.get(`http://localhost:3000/expense/get-expense?page=${page}`, {
+  const limit = document.getElementById('pagesize').value;
+    localStorage.setItem('rowLimit', limit);
+    console.log(limit);
+  const res = await axios.get(`http://localhost:3000/expense/get-expense?page=${page}&limit=${localStorage.getItem('rowLimit')}`, {
     headers: { Authorization: token },
   });
   clearList();
@@ -108,8 +111,11 @@ window.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("downloadexpense").style.visibility = 'visible';
   }
   try{
+    const limit = document.getElementById('pagesize').value;
+    localStorage.setItem('rowLimit', limit);
+    console.log(limit);
     const page = 1;
-  const res = await axios.get(`http://localhost:3000/expense/get-expense?page=${page}`, {
+  const res = await axios.get(`http://localhost:3000/expense/get-expense?page=${page}&limit=${localStorage.getItem('rowLimit')}`, {
       headers: { Authorization: token },
     })
     console.log(res);

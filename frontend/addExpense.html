@@ -62,9 +62,24 @@
       <button id="leader-board" class="btn btn-primary m-4" style="visibility: hidden">LeaderBoard</button>
       <button id="downloadexpense" onclick="download()" class="btn btn-primary m-4" style="visibility: hidden">Download Report</button>
     </div>
-    <ul id="list">Expenses</ul>
+    <h3>Expenses</h3>
+    <p>Rows per page</p>
+      <select
+          class="form-select mt-4 ms-4 w-auto"
+          aria-label="Default select example"
+          id="pagesize"
+        >
+          <!-- <option selected></option> -->
+          <option value=5>5</option>
+          <option value=10>10</option>
+          <option value=15>15</option>
+          <option value=20>20</option>
+        </select>
+
+    <ul id="list"></ul>
     <div id="pagination"></div>
-    <ul id="leaderboard-list">LeaderBoard</ul>
+    <h3>LeaderBoard</h3>
+    <ul id="leaderboard-list"></ul>
 
     <script src="addExpense.js"></script>
     <script
