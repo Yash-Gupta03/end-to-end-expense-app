@@ -43,6 +43,58 @@ function parseJwt (token) {
   return JSON.parse(jsonPayload);
 }
 
+function clearList(){
+  const root = document.getElementById("list");
+  while( root.firstChild ){
+    root.removeChild( root.firstChild );
+  }
+
+}
+
+async function getExpense(page){
+  const token = localStorage.getItem("id");
+  const res = await axios.get(`http://localhost:3000/expense/get-expense?page=${page}`, {
+    headers: { Authorization: token },
+  });
+  clearList();
+  for (let i = 0; i < res.data.allExpenseDetails.length; i++) {
+    showDataOnScreen(res.data.allExpenseDetails[i]);
+  }
+  showPagination(res.data)
+}
+
+function showPagination({
+  currentPage,
+  hasNextPage,
+  nextPage,
+  hasPreviousPage,
+  previousPage,
+  lastPage
+}){
+  console.log(hasNextPage);
+  const pagination = document.getElementById('pagination');
+  pagination.innerHTML = '';
+  if(hasPreviousPage){
+    const btn2 = document.createElement('button');
+    btn2.innerHTML = previousPage;
+    btn2.addEventListener('click', ()=> getExpense(previousPage));
+    pagination.appendChild(btn2)
+  }
+  const btn1 = document.createElement('button');
+  btn1.innerHTML = `<h3>${currentPage}</h3>`
+  btn1.addEventListener('click', ()=> getExpense(currentPage));
+  pagination.appendChild(btn1);
+
+  if(hasNextPage){
+    const btn3 = document.createElement('button');
+    console.log('button function');
+    btn3.innerHTML = nextPage;
+    btn3.addEventListener('click', ()=> getExpense(nextPage));
+    pagination.appendChild(btn3)
+  }
+
+}
+
 window.addEventListener("DOMContentLoaded", async () => {
   const token = localStorage.getItem("id");
   console.log(token);
@@ -56,12 +108,15 @@ window.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("downloadexpense").style.visibility = 'visible';
   }
   try{
-  const res = await axios.get("http://localhost:3000/expense/get-expense", {
+    const page = 1;
+  const res = await axios.get(`http://localhost:3000/expense/get-expense?page=${page}`, {
       headers: { Authorization: token },
     })
+    console.log(res);
       for (let i = 0; i < res.data.allExpenseDetails.length; i++) {
         showDataOnScreen(res.data.allExpenseDetails[i]);
       }
+      showPagination(res.data);
   }catch(err){ console.log(err);}
 });
 

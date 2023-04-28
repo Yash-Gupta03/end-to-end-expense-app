@@ -38,9 +38,21 @@ exports.addExpense = async (req, res, next) => {
   console.log(err);
 }};
 
+const ITEMS_PER_PAGE = 5;
 exports.getExpense = async (req, res, next) => {
-  const data = await Expense.findAll({ where: { userId: req.user.id } });
-  res.json({ allExpenseDetails: data });
+  const page = +req.query.page || 1;
+  console.log(page);
+  let totalItems = await Expense.count({where:{userId:req.user.id}});
+  console.log(totalItems);
+  const data = await Expense.findAll({ where: { userId: req.user.id }, offset: (page-1)* ITEMS_PER_PAGE,
+limit:ITEMS_PER_PAGE });
+  res.json({ allExpenseDetails: data,
+  currentPage:page,
+nextPage: page+1,
+hasNextPage: ITEMS_PER_PAGE*page < totalItems,
+hasPreviousPage: page>1,
+previousPage: page-1,
+lastPage:Math.ceil(totalItems/ITEMS_PER_PAGE) });
 };
 
 exports.deleteExpense = async (req, res, next) => {
