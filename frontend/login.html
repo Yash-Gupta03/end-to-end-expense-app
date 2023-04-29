@@ -14,9 +14,24 @@
   </head>
 
   <body>
-    <nav class="d-flex flex-row-reverse bd-highlight m-4 p-4">
-      <button class="btn btn-primary">Buy Premium</button>
+    
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Expense App</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item ">
+              <a class="nav-link" href="http://127.0.0.1:5500/frontend/signup.html"
+            > SignUp</a></li>
+          </ul>
+        </div>
+      </div>
     </nav>
+    
     <div class="wrapper bg-white">
       <div class="container w-50 mt-4 bg-white">
         <div class="form-details mt-5"></div>
@@ -48,13 +63,13 @@
             <label class="form-label" for="password">Password</label>
           </div>
 
-          <button type="submit" class="btn btn-primary m-4">SignIn</button>
+          <button type="submit" class="btn btn-primary m-4">Log In</button>
         </form>
-        <a href="http://127.0.0.1:5500/frontend/signup.html"
+        <!-- <a href="http://127.0.0.1:5500/frontend/signup.html"
           ><button class="btn btn-close-white m-1">
             I am a new user - SignUp
           </button></a
-        >
+        > -->
         <a href="http://127.0.0.1:5500/frontend/forgetPassword.html"
           ><button class="btn btn-close-white m-1">
             Forget Password
