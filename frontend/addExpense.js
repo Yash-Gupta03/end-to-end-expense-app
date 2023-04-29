@@ -48,7 +48,6 @@ function clearList(){
   while( root.firstChild ){
     root.removeChild( root.firstChild );
   }
-
 }
 
 async function getExpense(page){
@@ -118,6 +117,7 @@ window.addEventListener("DOMContentLoaded", async () => {
   const res = await axios.get(`http://localhost:3000/expense/get-expense?page=${page}&limit=${localStorage.getItem('rowLimit')}`, {
       headers: { Authorization: token },
     })
+    console.log("Hello, is this line working");
     console.log(res);
       for (let i = 0; i < res.data.allExpenseDetails.length; i++) {
         showDataOnScreen(res.data.allExpenseDetails[i]);

@@ -18,6 +18,7 @@ async function logindata(e) {
       if (response.status == 200) {
         alert(response.data.message);
         localStorage.setItem("id", response.data.token);
+        console.log("login to add expense");
         window.location.href = "./addExpense.html";
       }
     }catch(err){
