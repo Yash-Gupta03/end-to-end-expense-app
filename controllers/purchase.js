@@ -23,7 +23,6 @@ exports.purchasePremium = async (req, res, next) => {
       req.user
         .createOrder({ orderid: order.id, status: "PENDING" })
         .then(() => {
-          console.log("backend to frontend -- passing orderId and key");
           return res.status(201).json({ order, key_id: rzp.key_id });
         })
         .catch((err) => console.log(err));
